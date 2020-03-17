@@ -1,0 +1,25 @@
+spring:
+    activemq:
+#        broker-url: ${broker_url:tcp://localhost:61616}
+#        in-memory: false
+        broker-url: vm://embedded?broker.persistent=false,useShutdownHook=false
+        in-memory: true
+        send-timeout: ${timeo_send:5000}
+        pool:
+            enabled: true
+            idle-timeout: ${timeo_idle:10000}
+            max-connections: ${conn_max:2}
+        # Only required if depending upon serialized object transfer,
+        # and not required when using explicit converter e.g. Jackson 
+        #packages:
+        #    trusted:
+        #        - com.desasha.activemq.demo
+    jms:
+        cache:
+            enabled: true
+        listener:
+            acknowledge-mode: 2
+logging:
+    level:
+        ROOT: INFO
+        com.desasha: DEBUG
